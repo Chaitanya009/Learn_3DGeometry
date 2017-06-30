@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+
+    <title></title>
+  </head>
+  <body>
+
+    <a-scene>
+
+        <!--cursor-->
+        <a-camera position="0.3 0.4 2">
+          <a-cursor color="black">
+        </a-camera>
+
+        <!--background-->
+        <a-assets>
+            <a-asset-item id="object" src="models/aztec-temple.obj"></a-asset-item>
+            <a-asset-item id="material" src="models/aztec-temple.mtl"></a-asset-item>
+        </a-assets>
+        <a-obj-model src="#object" mtl="#material"></a-obj-model>
+        <a-sky color="#BBDEFB"></a-sky>
+
+        <!--Heading-->
+        <a-entity  text-geometry="value: 3D GEOMETRY;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1;size: 1; height: 0.5;" position="-2.4 4.4 -4.2" rotation="0 0 0" scale="0.6 0.8 0.8" material="color:#FFEB3B; metalness:0.1; roughness: 0.05; sphericalEnvMap: #chrome;">
+          <a-animation attribute="rotation" repeat="indefinite" to="360 0 0" id="heading"></a-animation>
+        </a-entity>
+
+        <a-entity id="option">
+          <!--options-->
+          <a-entity onclick="showcube()" text-geometry="value: CUBE;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#E91E63; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="1.6 1.5 -1.8" rotation="0 -30 0" scale="0.2 0.2 0.2">
+            <!--<a-animation attribute="rotation" begin="click" repeat="indefinite" to="0 90 0"></a-animation>-->
+          </a-entity>
+          <a-entity onclick="showdode()" text-geometry="value: DODECAHEDRON;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#33691E; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="1.6 2 -2" rotation="0 -30 0" scale="0.2 0.2 0.2"></a-entity>
+          <a-entity onclick="showcylin()" text-geometry="value: CYLINDER;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#FFFF00; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="2.5 1.5 -1.3" rotation="0 -30 0" scale="0.2 0.2 0.2"></a-entity>
+          <a-entity onclick="showocta()" text-geometry="value: OCTAHEDRON;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#FFFF00; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="-1 2 -2" rotation="0 0 0" scale="0.2 0.2 0.2"></a-entity>
+          <a-entity onclick="showcone()" text-geometry="value: CONE;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#4CC3D9; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="-1.8 1.5 -1" rotation="0 30 0" scale="0.2 0.2 0.2"></a-entity>
+          <a-entity onclick="showpyramid()" text-geometry="value: PYRAMID;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#FF8F00; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="-0.5 1.5 -1.5" rotation="0 0 0" scale="0.2 0.2 0.2"></a-entity>
+          <a-entity onclick="showsphere()" text-geometry="value: SPHERE;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#8D6E63; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="-3.1 1.5 -0.3" rotation="0 30 0" scale="0.2 0.2 0.2"></a-entity>
+          <a-entity onclick="showicosa()" text-geometry="value: ICOSAHEDRON;bevelEnabled: true; bevelSize: 0.1;bevelThickness: 0.1;curveSegments: 1.5;size: 1.3; height: 0.5;" material="color:#673AB7; metalness:0.09; roughness: 0.02; sphericalEnvMap: #chrome;" position="-3.3 2 -0.4" rotation="0 30 0" scale="0.2 0.2 0.2"></a-entity>
+        </a-entity>
+
+        <a-entity id=back visible="false" onclick="goback()">
+          <a-entity text-geometry="value: BACK;bevelEnabled: true; bevelSize: 0.06;bevelThickness: 0.06;curveSegments: 1.8;size: 0.8; height: 0.2;" material="color:#000000;metalness:0.07; roughness: 0.01; sphericalEnvMap: #chrome;" position="-0.2 1 0" scale="0.3 0.3 0.3"></a-entity>
+        </a-entity>
+
+        <a-entity visible="true">
+          <a-icosahedron id="icosa" radius="1.4" position="-3 1.9 -6" rotation="0 45 0" color="#4CC3D9" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="0 360 0"></a-animation>
+          </a-icosahedron>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-octahedron id="octa" radius="1.4" position="0 1.9 -6" rotation="0 45 0" color="#4CC3D9" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="0 360 0"></a-animation>
+          </a-octahedron>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-dodecahedron id="dode" radius="1.4" position="4.2 1.6 -8" rotation="0 45 0" color="#76FF03" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="0 360 0"></a-animation>
+          </a-dodecahedron>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-tetrahedron id="pyramid" radius="1.8" position="0 1.6 -5" rotation="0 45 0" color="#FF8F00" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="0 360 0"></a-animation>
+          </a-tetrahedron>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-sphere id="sphere" radius="0.6" position="-2.4 1.9 -1.4" color="#8D6E63" opacity="0">
+            <a-animation direction="normal" attribute="position" repeat="indefinite" from="-2.4 1.9 -1.4" to="-2.4 3.9 -1.4" dur="2000"></a-animation>
+          </a-sphere>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-cone id="cone" radius-bottom="0.6" radius-top="0" position="-1.4 1.9 -1.4" rotation="0 45 0" color="#4CC3D9" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="360 0 0"></a-animation>
+          </a-cone>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-box id="cube" width="1.5" height="1.5" depth="1.5" position="2.4 1.6 -5" rotation="0 45 0" color="#E91E63" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="0 360 0"></a-animation>
+          </a-box>
+        <a-entity>
+
+        <a-entity visible="true">
+          <a-cylinder id="cylinder" height="2.8" radius="1" position="5 2.2 -5" rotation="0 -40 0" color="#FFFF00" opacity="0">
+            <a-animation attribute="rotation" repeat="indefinite" to="360 0 0"></a-animation>
+          </a-cylinder>
+        <a-entity>
+
+
+
+
+
+    </a-scene>
+
+    <script type="text/javascript">
+        function showcube() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('cube').setAttribute('opacity', '0.7')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showcylin() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('cylinder').setAttribute('opacity', '0.8')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showpyramid() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('pyramid').setAttribute('opacity', '0.8')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showsphere() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('sphere').setAttribute('opacity', '0.8')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showcone() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('cone').setAttribute('opacity', '0.8')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showicosa() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('icosa').setAttribute('opacity', '0.8')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showocta() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('octa').setAttribute('opacity', '0.8')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function showdode() {
+          document.getElementById('option').setAttribute('visible', 'false')
+          document.getElementById('back').setAttribute('visible', 'true')
+          document.getElementById('dode').setAttribute('opacity', '0.7')
+          document.getElementById('heading').setAttribute('to', '0 0 0')
+
+        }
+        function goback(){
+          document.getElementById('cube').setAttribute('opacity','0')
+          document.getElementById('cylinder').setAttribute('opacity','0')
+          document.getElementById('pyramid').setAttribute('opacity','0')
+          document.getElementById('sphere').setAttribute('opacity','0')
+          document.getElementById('cone').setAttribute('opacity','0')
+          document.getElementById('icosa').setAttribute('opacity','0')
+          document.getElementById('octa').setAttribute('opacity','0')
+          document.getElementById('dode').setAttribute('opacity','0')
+          document.getElementById('back').setAttribute('visible', 'false')
+          document.getElementById('option').setAttribute('visible','true')
+          document.getElementById('heading').setAttribute('to', '360 0 0')
+        }
+    </script>
+
+  </body>
+</html>
